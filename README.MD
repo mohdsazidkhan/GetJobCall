@@ -4,7 +4,7 @@
 #### Run The App Locally
 
 ```sh
-npm run install-dependencies
+npm run install
 ```
 
 - rename .env.temp to .env
@@ -661,20 +661,13 @@ const port = process.env.PORT || 5000
 app.listen(port, () => console.log(`Server is listening on port ${port}...`))
 ```
 
-# Jobify
+# GetJobCall
 
-#### Track Your Job Search
-
-Project in Action - [Jobify](https://www.jobify.live/)
-
-#### Support
-
-Find the App Useful? [You can always buy me a coffee](https://www.buymeacoffee.com/johnsmilga)
 
 #### Run The App Locally
 
 ```sh
-npm run install-dependencies
+npm run install
 ```
 
 - rename .env.temp to .env
@@ -1455,7 +1448,7 @@ app.use('/api/v1/jobs', jobsRouter)
 #### Postman
 
 - URL global var
-- JOBIFY Collection
+- GetJobCall Collection
 - auth and jobs folders
 - setup routes
 
