@@ -4,6 +4,7 @@ import { useAppContext } from '../../context/appContext'
 import Wrapper from '../../assets/wrappers/DashboardFormPage'
 import {Helmet} from "react-helmet";
 const Profile = () => {
+
   const { user, showAlert, displayAlert, updateUser, isLoading, positions, genderOptions, locations } = useAppContext()
 
   const [name, setName] = useState(user?.name)
@@ -28,7 +29,7 @@ const Profile = () => {
         <title>Get Job Call | Profile</title>
       </Helmet>
       <form className='form' onSubmit={handleSubmit}>
-        <h3>profile</h3>
+        <h3>My Profile</h3>
         {showAlert && <Alert />}
         <div className='form-center'>
           <FormRow
@@ -68,7 +69,7 @@ const Profile = () => {
             handleChange={(e) => setLocation(e.target.value)}
             list={locations}
           />
-          <button className='btn btn-block' type='submit' disabled={isLoading}>
+          <button className='btn btn-block profileBtn' type='submit' disabled={isLoading}>
             {isLoading ? 'Please Wait...' : 'save changes'}
           </button>
         </div>

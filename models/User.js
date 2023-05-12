@@ -33,11 +33,9 @@ const UserSchema = new mongoose.Schema({
   },
   position: {
     type: String,
-    required: [true, 'Please select position'],
   },
   gender: {
     type: String,
-    required: [true, 'Please select gender'],
   },
   location: {
     type: String,
@@ -53,7 +51,7 @@ const UserSchema = new mongoose.Schema({
     type: String,
     required: [true, 'Please provide Phone No.'],
   }
-})
+},{ timestamps: true })
 
 UserSchema.pre('save', async function () {
   // console.log(this.modifiedPaths())

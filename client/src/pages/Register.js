@@ -13,6 +13,7 @@ const initialState = {
 }
 
 const Register = () => {
+
   const navigate = useNavigate()
   const [values, setValues] = useState(initialState)
   const { user, isLoading, showAlert, displayAlert, setupUser, userTypeOptions } = useAppContext()
@@ -33,6 +34,7 @@ const Register = () => {
       return
     }
     const currentUser = { userType, name, email, phone, password }
+
     if (isMember) {
       setupUser({
         currentUser,
@@ -49,12 +51,15 @@ const Register = () => {
   }
 
   useEffect(() => {
-    console.log(user, " user")
     if(user){
       setTimeout(() => {
+        if(user.userType === 'admin'){
+          navigate('/dashboard')
+        }
         if(user.userType === 'recruiter'){
-          navigate('/')
-        }else{
+          navigate('/stats')
+        }
+        if(user.userType === 'applicant'){
           navigate('/all-jobs')
         }
       }, 3000)

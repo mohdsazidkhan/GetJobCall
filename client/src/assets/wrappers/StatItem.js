@@ -5,6 +5,7 @@ const Wrapper = styled.article`
   background: var(--white);
   border-radius: var(--borderRadius);
   border-bottom: 5px solid ${(props) => props.color};
+  box-shadow: var(--shadowcard);
   header {
     display: flex;
     align-items: center;

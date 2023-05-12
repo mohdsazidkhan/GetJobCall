@@ -5,15 +5,16 @@ const Wrapper = styled.main`
     width: var(--fluid-width);
     max-width: var(--max-width);
     margin: 0 auto;
-    height: var(--nav-height);
+    height: 80px;
     display: flex;
     align-items: center;
   }
   .page {
-    min-height: calc(100vh - var(--nav-height));
+    height: calc(100vh - var(--nav-height));
     display: grid;
-    align-items: center;
-    margin-top: -3rem;
+  }
+  .info{
+    margin-top: 10vh;
   }
   h1 {
     font-weight: 700;
@@ -34,6 +35,12 @@ const Wrapper = styled.main`
     }
     .main-img {
       display: block;
+    }
+  }
+  @media (max-width: 767px){
+    .info {
+      margin-top: 0;
+      padding-bottom: 5vh;
     }
   }
 `

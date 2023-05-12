@@ -3,9 +3,9 @@ import mongoose from 'mongoose'
 const JobSchema = new mongoose.Schema(
   {
     company: {
-      type: String,
+      type: mongoose.Types.ObjectId,
+      ref: 'Company',
       required: [true, 'Please provide company'],
-      maxlength: 50,
     },
     position: {
       type: String,
@@ -14,12 +14,12 @@ const JobSchema = new mongoose.Schema(
     },
     status: {
       type: String,
-      enum: ['interview', 'declined', 'pending'],
+      enum: ['posted', 'interview', 'declined', 'pending', 'rejected'],
       default: 'pending',
     },
     jobType: {
       type: String,
-      enum: ['full-time', 'part-time', 'remote', 'internship'],
+      enum: ['full-time', 'part-time', 'remote', 'internship', 'contract'],
       default: 'full-time',
     },
     jobLocation: {

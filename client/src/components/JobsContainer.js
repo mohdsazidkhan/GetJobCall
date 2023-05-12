@@ -28,6 +28,9 @@ const JobsContainer = () => {
       if(user.userType === 'applicant'){
         getAllJobs()
       }
+      if(user.userType === 'admin'){
+        getAllJobs()
+      }
     }
     
     // eslint-disable-next-line
@@ -43,15 +46,14 @@ const JobsContainer = () => {
       </Wrapper>
     )
   }
-
   return (
     <Wrapper>
       <h5>
-        {totalJobs} job{jobs.length > 1 && 's'} found
+      {totalJobs === 1 && totalJobs+ ' Job'}  {totalJobs > 1 && totalJobs+' Jobs'} found
       </h5>
-      <div className='jobs'>
+      <div className='jobs' >
         {jobs.map((job) => {
-          return <Job key={job._id} {...job} />
+          return <Job key={job._id} company={job.company} createdBy={job.createdBy} {...job}/>
         })}
       </div>
       {numOfPages > 1 && <PageBtnContainer />}

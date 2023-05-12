@@ -2,12 +2,13 @@ import Job from '../models/Job.js'
 import { StatusCodes } from 'http-status-codes'
 import {
   BadRequestError,
-  NotFoundError,
-  UnAuthenticatedError,
+  NotFoundError
 } from '../errors/index.js'
 import checkPermissions from '../utils/checkPermissions.js'
 import mongoose from 'mongoose'
 import moment from 'moment'
+import AppliedJobs from '../models/AppliedJobs.js'
+
 const createJob = async (req, res) => {
 
   const { position, company, openings, salary} = req.body
@@ -20,6 +21,40 @@ const createJob = async (req, res) => {
   res.status(StatusCodes.CREATED).json({ job })
   
 }
+
+const applyJob = async (req, res) => {
+
+  let applicant = req.body?.applicant?._id;
+  let job = req.body?.jobDetail?._id;
+  let recruiter = req.body?.jobDetail?.createdBy;
+  let company = req.body?.jobDetail?.company?._id;
+
+  let applyData = {
+    applicant,
+    job,
+    recruiter,
+    company
+  }
+
+  if (!applicant && !job && !recruiter && !company) {
+    throw new BadRequestError('Please provide all values')
+  }
+  const data = await AppliedJobs.create(applyData)
+  res.status(StatusCodes.CREATED).json({ data })
+  
+}
+
+const getAppliedJobsByUser = async (req, res) => {
+  
+  const applicantId = req.params.userId;
+  
+  let result = AppliedJobs.find({applicant: applicantId}).populate('applicant').populate('job').populate('recruiter').populate('company')
+
+  const appliedJobs = await result
+
+  res.status(StatusCodes.OK).json({ appliedJobs })
+}
+
 const getAllJobsByUser = async (req, res) => {
   
   const { status, jobType, sort, search } = req.query
@@ -40,7 +75,7 @@ const getAllJobsByUser = async (req, res) => {
   }
   // NO AWAIT
 
-  let result = Job.find(queryObject)
+  let result = Job.find(queryObject).populate('createdBy').populate('company')
 
   // chain sort conditions
 
@@ -72,6 +107,26 @@ const getAllJobsByUser = async (req, res) => {
   res.status(StatusCodes.OK).json({ jobs, totalJobs, numOfPages })
 }
 
+const getJobDetail = async (req, res) => {
+  
+  const { jobId } = req.params
+
+  const queryObject = {
+    _id: jobId,
+  }
+
+  // NO AWAIT
+  let applyData = AppliedJobs.find({job: jobId})
+  let result =  Job.find(queryObject).populate('createdBy').populate('company')
+  
+  const jsonData = await applyData;
+  const jsonResult = await result;
+
+  let jobdetail = {jsonData, jsonResult}
+
+  res.status(StatusCodes.OK).json({jobdetail})
+}
+
 const getAllJobs = async (req, res) => {
   
   const { status, jobType, sort, search } = req.query
@@ -90,7 +145,7 @@ const getAllJobs = async (req, res) => {
   }
   // NO AWAIT
 
-  let result = Job.find(queryObject)
+  let result = Job.find(queryObject).populate('createdBy').populate('company')
 
   // chain sort conditions
 
@@ -115,7 +170,6 @@ const getAllJobs = async (req, res) => {
   result = result.skip(skip).limit(limit)
 
   const jobs = await result
-
   const totalJobs = await Job.countDocuments(queryObject)
   const numOfPages = Math.ceil(totalJobs / limit)
 
@@ -172,6 +226,7 @@ const showStats = async (req, res) => {
   }, {})
 
   const defaultStats = {
+    posted: stats.posted || 0,
     pending: stats.pending || 0,
     interview: stats.interview || 0,
     declined: stats.declined || 0,
@@ -205,4 +260,4 @@ const showStats = async (req, res) => {
   res.status(StatusCodes.OK).json({ defaultStats, monthlyApplications })
 }
 
-export { createJob, deleteJob, getAllJobsByUser, getAllJobs, updateJob, showStats }
+export { createJob, deleteJob, getAllJobsByUser, getAllJobs, applyJob, updateJob, showStats, getJobDetail, getAppliedJobsByUser }

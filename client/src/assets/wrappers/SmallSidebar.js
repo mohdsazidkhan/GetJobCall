@@ -21,9 +21,9 @@ const Wrapper = styled.aside`
   }
   .content {
     background: var(--white);
-    width: var(--fluid-width);
-    height: 95vh;
-    border-radius: var(--borderRadius);
+    width: 100%;
+    height: 100vh;
+    border-radius: 0;
     padding: 4rem 2rem;
     position: relative;
     display: flex;
@@ -33,11 +33,11 @@ const Wrapper = styled.aside`
   .close-btn {
     position: absolute;
     top: 10px;
-    left: 10px;
+    right: 10px;
     background: transparent;
     border-color: transparent;
-    font-size: 2rem;
-    color: var(--red-dark);
+    font-size: 1.5rem;
+    color: #939393;
     cursor: pointer;
   }
   .nav-links {

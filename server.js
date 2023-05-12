@@ -4,10 +4,8 @@ import dotenv from 'dotenv'
 dotenv.config()
 import 'express-async-errors'
 import morgan from 'morgan'
-
 import { dirname } from 'path'
 import { fileURLToPath } from 'url'
-import path from 'path'
 import bodyParser from 'body-parser';
 import helmet from 'helmet'
 import xss from 'xss-clean'
@@ -19,7 +17,10 @@ import connectDB from './db/connect.js'
 
 // routers
 import authRouter from './routes/authRoutes.js'
+import usersRouter from './routes/usersRoutes.js'
 import jobsRouter from './routes/jobsRoutes.js'
+import companiesRouter from './routes/companiesRoutes.js'
+import dashboardRouter from './routes/dashboardRoutes.js'
 
 // middleware
 import notFoundMiddleware from './middleware/not-found.js'
@@ -44,7 +45,10 @@ app.use(bodyParser.json()); // support json encoded bodies
 app.use(bodyParser.urlencoded({ extended: true })); // support encoded bodies
 
 app.use('/api/v1/auth', authRouter)
+app.use('/api/v1/users', authenticateUser, usersRouter)
 app.use('/api/v1/jobs', authenticateUser, jobsRouter)
+app.use('/api/v1/companies', authenticateUser, companiesRouter)
+app.use('/api/v1/dashboard', authenticateUser, dashboardRouter)
 
 // only when ready to deploy
 // app.get('*', (req, res) => {
@@ -54,12 +58,13 @@ app.use('/api/v1/jobs', authenticateUser, jobsRouter)
 app.use(notFoundMiddleware)
 app.use(errorHandlerMiddleware)
 
-const port = process.env.PORT || 6000
+const port = process.env.PORT || 4000
 
 const start = async () => {
   try {
     await connectDB(process.env.MONGO_URL)
     app.listen(port, () => {
+      console.log(`MongoDb Connected Successfully!`)
       console.log(`Server is listening on port ${port}`)
     })
   } catch (error) {

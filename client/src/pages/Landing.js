@@ -20,11 +20,7 @@ const Landing = () => {
             Electrician, Driver Jobs, Developer, Designer 50+ Categories in
             India which are 100% verified and Free. Got to the GetJobCall.com to
             find jobs that are genuine and in your area. Select the job you like
-            and call directly to the recruiter or company for an interview. Find
-            jobs in Delhi NCR, Mumbai, Pune, Bangalore, Hyderabad, Noida,
-            Gurgaon, Ghaziabad and Faridabad without paying any money. Apply for
-            Part Time Jobs, Work from Home Jobs, Contract Based and can choose
-            filters of location, desired job, salary, sectors and walk-in jobs.
+            and call directly to the recruiter or company for an interview.
           </p>
           <Link to="/register" className="btn btn-hero">
             Login/Register

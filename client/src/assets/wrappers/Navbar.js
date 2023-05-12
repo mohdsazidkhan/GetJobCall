@@ -69,9 +69,10 @@ const Wrapper = styled.nav`
   @media (min-width: 992px) {
     position: sticky;
     top: 0;
-
+    height: 4rem;
+    z-index:9;
     .nav-center {
-      width: 90%;
+      width: 98%;
     }
     .logo {
       display: none;

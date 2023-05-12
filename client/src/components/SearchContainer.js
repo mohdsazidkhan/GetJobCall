@@ -13,6 +13,7 @@ const SearchContainer = () => {
     handleChange,
     clearFilters,
     jobTypeOptions,
+    companytypes,
     statusOptions,
   } = useAppContext()
   const handleSearch = (e) => {
@@ -50,7 +51,7 @@ const SearchContainer = () => {
             name='searchType'
             value={searchType}
             handleChange={handleSearch}
-            list={['all', ...jobTypeOptions]}
+            list={['all', ...jobTypeOptions,]}
           />
           {/* sort */}
           <FormRowSelect

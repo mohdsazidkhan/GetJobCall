@@ -21,7 +21,7 @@ const Wrapper = styled.aside`
       margin-left: 0;
     }
     header {
-      height: 6rem;
+      height: 4rem;
       display: flex;
       align-items: center;
       padding-left: 2.5rem;

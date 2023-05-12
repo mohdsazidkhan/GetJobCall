@@ -8,14 +8,20 @@ const Wrapper = styled.section`
   .dashboard-page {
     width: 90vw;
     margin: 0 auto;
-    padding: 2rem 0;
+    padding: 2rem 0 5rem 0;
   }
   @media (min-width: 992px) {
     .dashboard {
       grid-template-columns: auto 1fr;
     }
     .dashboard-page {
-      width: 90%;
+      width: 94%;
+    }
+  }
+  @media (max-width:768px){
+    .dashboard-page {
+      width: 96vw;
+      padding: 0.5rem 0 5rem 0;
     }
   }
 `

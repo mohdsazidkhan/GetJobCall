@@ -1,17 +1,38 @@
-import {applicantlinks,recruiterlinks} from '../utils/links'
+import {applicantlinks,recruiterlinks,adminlinks} from '../utils/links'
 import { NavLink } from 'react-router-dom'
 import { useEffect, useState } from 'react'
 
 const NavLinks = ({ toggleSidebar }) => {
   const [userType, setUserType] = useState('')
   useEffect(()=>{
-    const user = localStorage.getItem('user');
-    const userType = JSON.parse(user).userType;
+    const user = JSON.parse(localStorage.getItem('user'));
+    const userType = user?.userType;
     if(userType){
       setUserType(userType)
     }
   },[userType])
-  if(userType === "recruiter"){
+  if(userType === "admin"){
+    return (
+      <div className='nav-links'>
+        {adminlinks.map((link) => {
+          const { text, path, id, icon } = link
+          return (
+            <NavLink
+              to={path}
+              key={id}
+              onClick={toggleSidebar}
+              className={({ isActive }) =>
+                isActive ? 'nav-link active' : 'nav-link'
+              }
+            >
+              <span className='icon'>{icon}</span>
+              {text}
+            </NavLink>
+          )
+        })}
+      </div>
+    )
+  }else if(userType === "recruiter"){
   return (
     <div className='nav-links'>
       {recruiterlinks.map((link) => {
