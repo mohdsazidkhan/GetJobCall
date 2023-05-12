@@ -4,7 +4,7 @@ import dotenv from 'dotenv'
 dotenv.config()
 import 'express-async-errors'
 import morgan from 'morgan'
-import { dirname } from 'path'
+import path, { dirname } from 'path'
 import { fileURLToPath } from 'url'
 import bodyParser from 'body-parser';
 import helmet from 'helmet'
