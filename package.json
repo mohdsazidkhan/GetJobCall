@@ -3,7 +3,6 @@
   "version": "1.0.0",
   "description": "#### Track Your Job Search",
   "main": "index.js",
-  "type": "module",
   "scripts": {
     "install-server": "npm install",
     "install-dependencies": " npm run install-client && npm run install-server ",
