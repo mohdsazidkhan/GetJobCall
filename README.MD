@@ -3,6 +3,8 @@
 
 #### Run The App Locally
 
+
+#### Setup Backend Server on Local
 ```sh
 npm run install
 ```
@@ -11,12 +13,12 @@ npm run install
 - setup values for - MONGO_URL, JWT_SECRET, JWT_LIFETIME
 
 ```sh
-npm start
+npm run dev
 ```
 
-- visit url http://localhost:3000/
 
-#### Setup React App
+
+#### #### Setup React App on Local
 
 - create <b>client</b> folder
 - open terminal
@@ -26,12 +28,14 @@ cd client
 ```
 
 ```sh
-npx create-react-app .
+npm run install
 ```
 
 ```sh
 npm start
 ```
+
+- visit url http://localhost:3000/
 
 - set editor/browser side by side
 - copy/paste assets from complete project
