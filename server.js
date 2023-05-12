@@ -51,26 +51,14 @@ app.use('/api/v1/companies', authenticateUser, companiesRouter)
 app.use('/api/v1/dashboard', authenticateUser, dashboardRouter)
 
 // only when ready to deploy
-// app.get('*', (req, res) => {
-//   res.sendFile(path.resolve(__dirname, './client/build', 'index.html'))
-// })
+app.get('*', (req, res) => {
+  res.sendFile(path.resolve(__dirname, './client/build', 'index.html'))
+})
 
 app.use(notFoundMiddleware)
 app.use(errorHandlerMiddleware)
 
 const port = process.env.PORT || 4000
-
-if (process.env.NODE_ENV === "production") {
-  const path = require("path");
-  app.use(express.static(path.resolve(__dirname, 'client', 'build')));
-  app.get("*", (req, res) => {
-      res.sendFile(path.resolve(__dirname, 'client', 'build', 'index.html'), function (err) {
-          if(err) {
-            res.status(500).send(err)
-          }
-      });
-  })
-}
 
 const start = async () => {
   try {
